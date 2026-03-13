@@ -32,3 +32,52 @@ Run the container
 docker compose up -d
 Access in browser
 http://localhost:8081
+
+
+
+Question 13
+Problem
+
+Create a docker-compose.yml file to deploy the following application:
+
+Requirements
+
+Server 1: Nginx Web Server
+
+Image: nginx
+
+Port Mapping: 8085
+
+Service 2: Redis Database
+
+Image: redis
+
+Both services must run on a custom network called appnetwork
+
+The Nginx container name should be nginx_server
+
+Solution
+version: "3"
+
+services:
+  server1:
+    image: nginx
+    container_name: nginx_server
+    ports:
+      - "8085:80"
+    networks:
+      - appnetwork
+
+  redisdb:
+    image: redis
+    networks:
+      - appnetwork
+
+networks:
+  appnetwork:
+Run the application
+docker compose up -d
+Check running containers
+docker ps
+Access Nginx
+http://localhost:8085
